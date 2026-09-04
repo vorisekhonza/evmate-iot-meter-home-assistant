@@ -1,0 +1,56 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Add EVmate IoT Meter",
+        "description": "Enter the IoT Meter IP address.",
+        "data": {
+          "host": "IP address",
+          "port": "Port"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Unable to connect to EVmate IoT Meter."
+    },
+    "abort": {
+      "already_configured": "This EVmate IoT Meter is already configured."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "voltage_l1": {"name": "Voltage L1"},
+      "voltage_l2": {"name": "Voltage L2"},
+      "voltage_l3": {"name": "Voltage L3"},
+      "current_l1": {"name": "Current L1"},
+      "current_l2": {"name": "Current L2"},
+      "current_l3": {"name": "Current L3"},
+      "power_l1": {"name": "Power L1"},
+      "power_l2": {"name": "Power L2"},
+      "power_l3": {"name": "Power L3"},
+      "power_total": {"name": "Total power"},
+      "power_factor_l1": {"name": "Power factor L1"},
+      "power_factor_l2": {"name": "Power factor L2"},
+      "power_factor_l3": {"name": "Power factor L3"},
+      "energy_positive_l1": {"name": "Positive energy L1"},
+      "energy_positive_l2": {"name": "Positive energy L2"},
+      "energy_positive_l3": {"name": "Positive energy L3"},
+      "energy_negative_l1": {"name": "Negative energy L1"},
+      "energy_negative_l2": {"name": "Negative energy L2"},
+      "energy_negative_l3": {"name": "Negative energy L3"},
+      "energy_positive_total": {"name": "Total positive energy"},
+      "energy_negative_total": {"name": "Total negative energy"},
+      "evse_requested_current": {"name": "EVSE requested current"},
+      "evse_output_current": {"name": "EVSE output current"},
+      "evse_state": {"name": "EVSE state"},
+      "evse_internal_state": {"name": "EVSE internal state"},
+      "evse_status": {"name": "EVSE status"},
+      "evse_comm_error": {"name": "EVSE communication error"},
+      "charging_duration": {"name": "Current charging duration"},
+      "charging_session_energy": {"name": "Current charging session energy"},
+      "charging_user": {"name": "Charging user"},
+      "car_soc": {"name": "Car SOC"},
+      "charge_mode_raw": {"name": "Charge mode (raw)"}
+    }
+  }
+}
