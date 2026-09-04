@@ -1,0 +1,56 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Přidat EVmate IoT Meter",
+        "description": "Zadejte IP adresu IoT Meteru.",
+        "data": {
+          "host": "IP adresa",
+          "port": "Port"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "K EVmate IoT Meteru se nepodařilo připojit."
+    },
+    "abort": {
+      "already_configured": "Tento EVmate IoT Meter je již nakonfigurován."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "voltage_l1": {"name": "Napětí L1"},
+      "voltage_l2": {"name": "Napětí L2"},
+      "voltage_l3": {"name": "Napětí L3"},
+      "current_l1": {"name": "Proud L1"},
+      "current_l2": {"name": "Proud L2"},
+      "current_l3": {"name": "Proud L3"},
+      "power_l1": {"name": "Výkon L1"},
+      "power_l2": {"name": "Výkon L2"},
+      "power_l3": {"name": "Výkon L3"},
+      "power_total": {"name": "Výkon celkem"},
+      "power_factor_l1": {"name": "Účiník L1"},
+      "power_factor_l2": {"name": "Účiník L2"},
+      "power_factor_l3": {"name": "Účiník L3"},
+      "energy_positive_l1": {"name": "Energie + L1"},
+      "energy_positive_l2": {"name": "Energie + L2"},
+      "energy_positive_l3": {"name": "Energie + L3"},
+      "energy_negative_l1": {"name": "Energie − L1"},
+      "energy_negative_l2": {"name": "Energie − L2"},
+      "energy_negative_l3": {"name": "Energie − L3"},
+      "energy_positive_total": {"name": "Energie + celkem"},
+      "energy_negative_total": {"name": "Energie − celkem"},
+      "evse_requested_current": {"name": "EVSE požadovaný proud"},
+      "evse_output_current": {"name": "EVSE nastavený proud"},
+      "evse_state": {"name": "EVSE stav"},
+      "evse_internal_state": {"name": "EVSE interní stav"},
+      "evse_status": {"name": "EVSE status"},
+      "evse_comm_error": {"name": "EVSE chyba komunikace"},
+      "charging_duration": {"name": "Doba aktuálního nabíjení"},
+      "charging_session_energy": {"name": "Energie aktuálního nabíjení"},
+      "charging_user": {"name": "Uživatel nabíjení"},
+      "car_soc": {"name": "SOC auta"},
+      "charge_mode_raw": {"name": "Režim nabíjení (raw)"}
+    }
+  }
+}
