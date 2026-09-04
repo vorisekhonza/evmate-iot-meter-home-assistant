@@ -1,7 +1,7 @@
 {
   "domain": "evmate_iot_meter",
   "name": "EVmate IoT Meter",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "config_flow": true,
   "integration_type": "device",
   "iot_class": "local_polling",
