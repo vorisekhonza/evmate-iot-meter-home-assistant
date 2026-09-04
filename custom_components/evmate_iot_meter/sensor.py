@@ -147,6 +147,51 @@ SENSORS = (
         value_fn=lambda d: sum((_energy_10wh(d.get(k)) or 0) for k in ("E1tN","E2tN","E3tN")),
     ),
 
+    # Daily grid energy. EVmate exposes EpDP/EpDN as today's positive/negative
+    # energy totals and E1d*/E2d*/E3d* per phase. Values use 10 Wh units.
+    EVmateSensorDescription(
+        key="daily_import",
+        translation_key="daily_import",
+        json_key="EpDP",
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        device_class=SensorDeviceClass.ENERGY,
+        state_class=SensorStateClass.TOTAL,
+        value_fn=lambda d: _energy_10wh(d.get("EpDP")),
+    ),
+    EVmateSensorDescription(
+        key="daily_export",
+        translation_key="daily_export",
+        json_key="EpDN",
+        native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+        device_class=SensorDeviceClass.ENERGY,
+        state_class=SensorStateClass.TOTAL,
+        value_fn=lambda d: _energy_10wh(d.get("EpDN")),
+    ),
+    *tuple(
+        EVmateSensorDescription(
+            key=f"daily_import_l{i}",
+            translation_key=f"daily_import_l{i}",
+            json_key=f"E{i}dP",
+            native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+            device_class=SensorDeviceClass.ENERGY,
+            state_class=SensorStateClass.TOTAL,
+            value_fn=(lambda phase: (lambda d: _energy_10wh(d.get(f"E{phase}dP"))))(i),
+        )
+        for i in (1, 2, 3)
+    ),
+    *tuple(
+        EVmateSensorDescription(
+            key=f"daily_export_l{i}",
+            translation_key=f"daily_export_l{i}",
+            json_key=f"E{i}dN",
+            native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
+            device_class=SensorDeviceClass.ENERGY,
+            state_class=SensorStateClass.TOTAL,
+            value_fn=(lambda phase: (lambda d: _energy_10wh(d.get(f"E{phase}dN"))))(i),
+        )
+        for i in (1, 2, 3)
+    ),
+
     EVmateSensorDescription(
         key="evse_requested_current",
         translation_key="evse_requested_current",
@@ -165,68 +210,33 @@ SENSORS = (
         state_class=SensorStateClass.MEASUREMENT,
         optional=True,
     ),
+    EVmateSensorDescription(key="evse_state", translation_key="evse_state", json_key="EV_STATE", optional=True),
+    EVmateSensorDescription(key="evse_internal_state", translation_key="evse_internal_state", json_key="EVSE_STATE", optional=True),
+    EVmateSensorDescription(key="evse_status", translation_key="evse_status", json_key="EVSE_STATUS", optional=True),
+    EVmateSensorDescription(key="evse_comm_error", translation_key="evse_comm_error", json_key="EV_COMM_ERR", optional=True),
     EVmateSensorDescription(
-        key="evse_state",
-        translation_key="evse_state",
-        json_key="EV_STATE",
-        optional=True,
-    ),
-    EVmateSensorDescription(
-        key="evse_internal_state",
-        translation_key="evse_internal_state",
-        json_key="EVSE_STATE",
-        optional=True,
-    ),
-    EVmateSensorDescription(
-        key="evse_status",
-        translation_key="evse_status",
-        json_key="EVSE_STATUS",
-        optional=True,
-    ),
-    EVmateSensorDescription(
-        key="evse_comm_error",
-        translation_key="evse_comm_error",
-        json_key="EV_COMM_ERR",
-        optional=True,
-    ),
-    EVmateSensorDescription(
-        key="charging_duration",
-        translation_key="charging_duration",
-        json_key="DURATION",
+        key="charging_duration", translation_key="charging_duration", json_key="DURATION",
         native_unit_of_measurement=UnitOfTime.MINUTES,
         device_class=SensorDeviceClass.DURATION,
         state_class=SensorStateClass.MEASUREMENT,
         optional=True,
     ),
     EVmateSensorDescription(
-        key="charging_session_energy",
-        translation_key="charging_session_energy",
-        json_key="SESSION_ENERGY",
+        key="charging_session_energy", translation_key="charging_session_energy", json_key="SESSION_ENERGY",
         native_unit_of_measurement=UnitOfEnergy.WATT_HOUR,
         device_class=SensorDeviceClass.ENERGY,
         state_class=SensorStateClass.TOTAL,
         optional=True,
     ),
+    EVmateSensorDescription(key="charging_user", translation_key="charging_user", json_key="USER", optional=True),
     EVmateSensorDescription(
-        key="charging_user",
-        translation_key="charging_user",
-        json_key="USER",
-        optional=True,
-    ),
-    EVmateSensorDescription(
-        key="car_soc",
-        translation_key="car_soc",
-        json_key="soc",
+        key="car_soc", translation_key="car_soc", json_key="soc",
         native_unit_of_measurement=PERCENTAGE,
         device_class=SensorDeviceClass.BATTERY,
         state_class=SensorStateClass.MEASUREMENT,
         optional=True,
     ),
-    EVmateSensorDescription(
-        key="charge_mode_raw",
-        translation_key="charge_mode_raw",
-        json_key="chargeMode",
-    ),
+    EVmateSensorDescription(key="charge_mode_raw", translation_key="charge_mode_raw", json_key="chargeMode"),
 )
 
 async def async_setup_entry(
