@@ -11,7 +11,22 @@ Experimental custom integration for the **EVmate IoT Meter** using its local HTT
 - Active power L1/L2/L3 and total
 - Power factor L1/L2/L3
 - Positive/negative cumulative energy counters
+- Today's import/export totals
+- Today's import/export per phase
 - EVSE-related values when exposed by the firmware, including requested/output current, EVSE status, charging duration, session energy, charging user, SOC and raw charge mode
+
+## Version 0.3.0
+
+Added daily energy sensors from the fields returned by the meter:
+
+- `EpDP` → today's import
+- `EpDN` → today's export
+- `E1dP`, `E2dP`, `E3dP` → today's import per phase
+- `E1dN`, `E2dN`, `E3dN` → today's export per phase
+
+EVmate documents the per-phase daily energy values as `10 Wh` units, so the integration converts them to Wh for Home Assistant.
+
+The P/N direction naming is based on the positive/negative energy convention used by the meter and should still be verified on additional installations against the EVmate application.
 
 ## Installation with HACS
 
